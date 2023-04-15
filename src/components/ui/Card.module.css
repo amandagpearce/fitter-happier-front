@@ -1,0 +1,9 @@
+.card {
+  background-color: #279fe2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.exercises-logger {
+  top: -60px;
+  position: relative;
+}
