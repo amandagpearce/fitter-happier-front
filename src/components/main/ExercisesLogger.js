@@ -1,13 +1,10 @@
 import React from "react";
 import Select from "../ui/Select";
 import Button from "../ui/Button";
-import { Bebas_Neue } from "next/font/google";
-
-const font = Bebas_Neue({ subsets: ["latin"], weight: "400" });
 
 const ExercisesLogger = ({ exercises }) => {
   return (
-    <div className={`exercises-logger-content row ${font.className}`}>
+    <div className={`exercises-logger-content row`}>
       <div className="exercise-selector col-2">
         <Select
           options={["Ontem", "Hoje"]}
