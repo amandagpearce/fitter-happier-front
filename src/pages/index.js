@@ -4,9 +4,7 @@ import ExercisesLogger from "@component/components/main/ExercisesLogger";
 import MyExercises from "@component/components/main/MyExercises";
 
 export async function getStaticProps() {
-  console.log("Get static props home");
   const exercises = await getExercises();
-  console.log("exercises", exercises);
   return { props: { exercises } };
 }
 
@@ -18,7 +16,7 @@ export default function Home({ exercises }) {
           <ExercisesLogger exercises={exercises} />
         </Card>
 
-        <Card className="user-exercises">
+        <Card className="user-exercises" title="Meus Exercícios">
           <MyExercises />
         </Card>
       </div>

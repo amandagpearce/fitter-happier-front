@@ -1,10 +1,10 @@
 import classes from "./Card.module.css";
 
-function Card(props) {
-  console.log(props.className);
+function Card({ className, children, title }) {
   return (
-    <div className={`${classes.card} ${classes[props.className]}`}>
-      {props.children}
+    <div className={`${classes.card} ${classes[className]}`}>
+      {title && <h2>{title}</h2>}
+      {children}
     </div>
   );
 }
