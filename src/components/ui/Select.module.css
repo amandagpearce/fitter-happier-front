@@ -3,14 +3,16 @@
   border-color: #c99bff;
   border-radius: 22px;
   color: #fff;
-  padding: 7px 10px;
+  padding: 10px 35px 10px 10px;
+  width: auto;
   font-size: 1em;
-  line-height: 1rem;
+  line-height: 1.2rem;
   letter-spacing: 0.5px;
 }
 .selectLabel {
   color: #fff;
-  font-size: 1.4rem;
+  line-height: 1.5rem;
+  font-size: 1.5rem;
   letter-spacing: 0.5px;
   padding: 7px 10px;
 }

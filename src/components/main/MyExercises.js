@@ -3,6 +3,7 @@ import React from "react";
 import Button from "../ui/Button";
 import Link from "next/link";
 import Video from "../ui/Video";
+import Legend from "../ui/Legend";
 
 const MyExercises = () => {
   const EXERCISES_DUMMY = [
@@ -23,23 +24,12 @@ const MyExercises = () => {
   let userExercises = EXERCISES_DUMMY.map((exercise) => {
     return (
       <div className="exerciseContainer" key={exercise.id}>
-        <div className="exerciseHeader">
-          <Button size="small" title={exercise.type}>
-            {exercise.type}
-          </Button>
-
-          <div className="exerciseDetails">
-            <h4>{exercise.name}</h4>
-            <ul className="exerciseActions">
-              <li>
-                <Link href="#">EDITAR</Link>
-              </li>
-              <li>
-                <Link href="#">EXCLUIR</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <Legend
+          actions={true}
+          background={true}
+          description={exercise.name}
+          title={exercise.type}
+        />
 
         <div className="exerciseContent">
           {exercise.videos.map((video) => {

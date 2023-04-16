@@ -21,7 +21,7 @@ const Graph = () => {
             r="195"
             cx="50%"
             cy="50%"
-            strokeWidth="20"
+            strokeWidth="19"
             stroke="white"
             fill="none"
           ></circle>
@@ -56,7 +56,7 @@ const Graph = () => {
             r="160"
             cx="50%"
             cy="50%"
-            strokeWidth="20"
+            strokeWidth="19"
             stroke="white"
             fill="none"
           ></circle>
@@ -91,7 +91,7 @@ const Graph = () => {
             r="125"
             cx="50%"
             cy="50%"
-            strokeWidth="20"
+            strokeWidth="19"
             stroke="white"
             fill="none"
           ></circle>

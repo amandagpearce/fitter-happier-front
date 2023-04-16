@@ -10,3 +10,11 @@
   margin-bottom: -50px;
   position: relative;
 }
+
+.title {
+  color: #fff;
+  line-height: 1.5rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+  padding: 7px 10px;
+}

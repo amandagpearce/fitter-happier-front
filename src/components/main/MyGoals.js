@@ -6,13 +6,11 @@ const MyGoals = () => {
   return (
     <React.Fragment>
       <div className="col-12">
-        <div className="col-xs-12 col-lg-2">
-          <Select
-            id="exercise-goals"
-            label="Minhas metas de exercício"
-            options={["ÚLTIMO MÊS", "3 MESES", "6 MESES", "1 ANO"]}
-          />
-        </div>
+        <Select
+          id="exercise-goals"
+          label="Minhas metas de exercício"
+          options={["ÚLTIMO MÊS", "3 MESES", "6 MESES", "1 ANO"]}
+        />
       </div>
       <div className="row">
         <div className="col-xs-12 col-md-4">

@@ -4,9 +4,9 @@ import ExercisesLogger from "@component/components/main/ExercisesLogger";
 import MyExercises from "@component/components/main/MyExercises";
 import MyGoals from "@component/components/main/MyGoals";
 // import { Sofia_Sans_Condensed } from "next/font/google";
-import { Abel } from "next/font/google";
+import { Merriweather_Sans } from "next/font/google";
 
-const font = Abel({ subsets: ["latin"], weight: "400" });
+const font = Merriweather_Sans({ subsets: ["latin"], weight: "400" });
 
 export async function getStaticProps() {
   const exercises = await getExercises();
