@@ -1,0 +1,28 @@
+.chart {
+  margin: 0;
+  position: absolute;
+}
+
+.secondChart {
+  left: 8%;
+  top: 8%;
+}
+
+.thirdChart {
+  left: 17%;
+  top: 17%;
+}
+
+.chartSvg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.circleForeground {
+  /*stroke-dasharray: 290.45px 580.9px; /* x 2x */
+  /* stroke-dashoffset: 290.45px; */
+  stroke-dashoffset: 0;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
