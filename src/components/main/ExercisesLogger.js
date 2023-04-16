@@ -9,13 +9,16 @@ const ExercisesLogger = ({ exercises }) => {
   return (
     <div className={`exercises-logger-content row ${font.className}`}>
       <div className="exercise-selector col-2">
-        <Select options={["Ontem", "Hoje"]} />
-        <p>FIZ O EXERCÍCIO</p>
+        <Select
+          options={["Ontem", "Hoje"]}
+          label="Fiz o exercício:"
+          id="exercise-logger"
+        />
       </div>
 
       {exercises.map((exercise) => {
         return (
-          <div className="col-2" key={exercise.id}>
+          <div className="col-sm-2 col-md-2 col-xl-1" key={exercise.id}>
             <Button title={exercise.type} size="large" />
           </div>
         );

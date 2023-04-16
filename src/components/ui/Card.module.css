@@ -2,9 +2,11 @@
   background-color: #279fe2;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   padding: 25px 50px;
+  margin-bottom: 20px;
 }
 
 .exercises-logger {
-  top: -60px;
+  top: -70px;
+  margin-bottom: -50px;
   position: relative;
 }

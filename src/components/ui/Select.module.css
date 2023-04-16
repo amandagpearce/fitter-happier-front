@@ -4,4 +4,14 @@
   border-radius: 22px;
   max-width: 95px;
   color: #fff;
+  padding: 7px 10px;
+  font-size: 1em;
+  line-height: 1rem;
+  letter-spacing: 0.5px;
+}
+.selectLabel {
+  color: #fff;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  padding: 7px 10px;
 }

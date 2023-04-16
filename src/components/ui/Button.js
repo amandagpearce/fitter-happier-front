@@ -9,7 +9,7 @@ const Button = ({ title, size }) => {
       data-toggle="button"
       aria-pressed="false"
       autoComplete="on"
-      onClick={console.log("clicou")}
+      onClick={() => console.log("clicou")}
     >
       {title}
     </button>
