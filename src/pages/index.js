@@ -9,7 +9,7 @@ import classes from "./index.module.css";
 
 const font = Merriweather_Sans({ subsets: ["latin"], weight: "400" });
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const exercises = await getExercises();
   return { props: { exercises } };
 }
