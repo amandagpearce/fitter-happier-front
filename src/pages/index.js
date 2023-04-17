@@ -5,6 +5,7 @@ import MyExercises from "@component/components/main/MyExercises";
 import MyGoals from "@component/components/main/MyGoals";
 // import { Sofia_Sans_Condensed } from "next/font/google";
 import { Merriweather_Sans } from "next/font/google";
+import classes from "./index.module.css";
 
 const font = Merriweather_Sans({ subsets: ["latin"], weight: "400" });
 
@@ -16,7 +17,9 @@ export async function getStaticProps() {
 export default function Home({ exercises }) {
   return (
     <>
-      <div className={`${font.className} container`}>
+      <div
+        className={`${font.className} ${classes.appContainer} container-fluid`}
+      >
         <Card className="exercises-logger">
           <ExercisesLogger exercises={exercises} />
         </Card>

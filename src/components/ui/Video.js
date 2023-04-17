@@ -1,5 +1,6 @@
 import React from "react";
 import YouTube from "react-youtube";
+import classes from "./Video.module.css";
 
 const Video = ({ yt_id, title }) => {
   const yt_opts = {
@@ -18,8 +19,13 @@ const Video = ({ yt_id, title }) => {
 
   return (
     <React.Fragment>
-      <YouTube videoId={yt_id} opts={yt_opts} onReady={onPlayerReady} />
-      <p>{title}</p>
+      <YouTube
+        className={classes.yt_video}
+        videoId={yt_id}
+        opts={yt_opts}
+        onReady={onPlayerReady}
+      />
+      <p className={classes.title}>{title}</p>
     </React.Fragment>
   );
 };

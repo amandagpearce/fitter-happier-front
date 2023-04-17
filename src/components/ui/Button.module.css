@@ -1,39 +1,71 @@
 .button {
   border-width: 3px;
 }
+
 .A {
   background-color: #04c4eb;
   border-color: #22d2f5;
 }
+
 .A:hover,
 .A:active,
 .A:focus {
   background-color: #0dcaf0;
   border-color: #52e2ff;
 }
+
 .B {
   background-color: #62a5f9;
   border-color: #7ab2f9;
 }
+
 .B:hover,
 .B:active,
 .B:focus {
   background-color: #72b1ff;
   border-color: #97c5ff;
 }
+
 .C {
   background-color: #dd7df5;
   border-color: #e291f7;
 }
+
 .C:hover,
 .C:active,
 .C:focus {
   background-color: #df80f7;
   border-color: #eaa1fd;
 }
+
 .large {
   width: 100%;
   font-size: 2.8rem;
   aspect-ratio: 1/1;
   padding: 0;
+}
+
+.add {
+  margin: 60px auto 20px auto;
+  display: block;
+  height: 95px;
+  width: auto;
+  height: auto;
+  font-size: 1.2rem;
+  aspect-ratio: unset;
+  padding: 10px;
+  aspect-ratio: unset;
+  background-color: #00cb3a;
+  border-color: #11eb50;
+}
+
+.add:before {
+  content: "+";
+  margin-right: 10px;
+  color: #fff;
+}
+
+.add:hover {
+  background: #00de40;
+  border-color: #3aee6e;
 }

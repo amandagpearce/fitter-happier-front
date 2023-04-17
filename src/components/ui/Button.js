@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Button.module.css";
 
-const Button = ({ title, size }) => {
+const Button = ({ title, size, children }) => {
   console.log("aaaa", size);
   return (
     <button
@@ -11,7 +11,7 @@ const Button = ({ title, size }) => {
       autoComplete="on"
       onClick={() => console.log("clicou")}
     >
-      {title}
+      {children}
     </button>
   );
 };

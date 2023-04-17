@@ -1,0 +1,13 @@
+.yt_video {
+  margin-bottom: 0;
+}
+
+.title {
+  color: #fff;
+  background-color: #246285;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding: 10px;
+  margin-top: -7px;
+  font-size: 0.9rem;
+}

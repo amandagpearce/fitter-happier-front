@@ -16,7 +16,9 @@ const ExercisesLogger = ({ exercises }) => {
       {exercises.map((exercise) => {
         return (
           <div className="col-sm-2 col-md-2 col-xl-1" key={exercise.id}>
-            <Button title={exercise.type} size="large" />
+            <Button title={exercise.type} size="large">
+              {exercise.type}
+            </Button>
           </div>
         );
       })}

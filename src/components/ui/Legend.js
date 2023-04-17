@@ -4,16 +4,14 @@ import classes from "./Legend.module.css";
 
 const Legend = ({ title, description, background, actions }) => {
   return (
-    <div>
+    <div className={classes.legend}>
       <span className={classes[title]}>{title}</span>
-      <div>
-        <p
-          className={
-            background ? classes.descriptionBackground : classes.description
-          }
-        >
-          {description}
-        </p>
+      <div
+        className={
+          background ? classes.descriptionBackground : classes.description
+        }
+      >
+        <p>{description}</p>
         {actions && (
           <ul>
             <li>
