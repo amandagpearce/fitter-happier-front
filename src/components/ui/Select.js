@@ -20,7 +20,7 @@ const Select = ({ options, label, id, onChange }) => {
       >
         {selectOptions}
       </select>
-      <label className={classes.selectLabel} for={id}>
+      <label className={classes.selectLabel} htmlFor={id}>
         {label}
       </label>
     </React.Fragment>

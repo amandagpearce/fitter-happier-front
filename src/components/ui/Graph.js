@@ -30,9 +30,10 @@ const Graph = ({ exercises }) => {
 
   return (
     <div className={classes.graphsWrapper}>
-      {circles.map((circle) => {
+      {circles.map((circle, index) => {
         return (
           <figure
+            key={index}
             className={`${classes.chart}`}
             style={{
               width: circle.radius * 2 + 20,

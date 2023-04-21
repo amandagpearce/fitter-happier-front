@@ -29,20 +29,17 @@ let DUMMY_PREV_EXERCISES = [
 
 const ExerciseCalendar = (props) => {
   const eventStyleGetter = useCallback(
-    (event, start, end, isSelected) => (
-      console.log(event),
-      {
-        ...(event.title.includes("A") && {
-          className: classes.A,
-        }),
-        ...(event.title.includes("B") && {
-          className: classes.B,
-        }),
-        ...(event.title.includes("C") && {
-          className: classes.C,
-        }),
-      }
-    ),
+    (event, start, end, isSelected) => ({
+      ...(event.title.includes("A") && {
+        className: classes.A,
+      }),
+      ...(event.title.includes("B") && {
+        className: classes.B,
+      }),
+      ...(event.title.includes("C") && {
+        className: classes.C,
+      }),
+    }),
     []
   );
   const [hydrated, setHydrated] = useState(false);

@@ -88,9 +88,12 @@ const MyExercises = () => {
         />
 
         <div className="exerciseContent row">
-          {exercise.videos.map((video) => {
+          {exercise.videos.map((video, counter) => {
             return (
-              <div className="col-xs-1 col-md-2 col-lg-4 col-xl-3">
+              <div
+                key={counter}
+                className="col-xs-1 col-md-2 col-lg-4 col-xl-3"
+              >
                 <Video yt_id={video.yt_id} title={video.title} />
               </div>
             );
