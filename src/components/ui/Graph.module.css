@@ -1,16 +1,23 @@
+.graphsWrapper {
+  width: 410px;
+  height: 410px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .chart {
   margin: 0;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.secondChart {
-  left: 8%;
-  top: 8%;
-}
-
-.thirdChart {
-  left: 17%;
-  top: 17%;
+.circleFigcaption {
+  position: absolute;
+  left: 10px;
 }
 
 .chartSvg {
@@ -20,9 +27,19 @@
 }
 
 .circleForeground {
-  /*stroke-dasharray: 290.45px 580.9px; /* x 2x */
-  /* stroke-dashoffset: 290.45px; */
   stroke-dashoffset: 0;
   transform-origin: 50% 50%;
   transform: rotate(-90deg);
+}
+
+.circleForeground.A {
+  stroke: #04c4eb;
+}
+
+.circleForeground.B {
+  stroke: #62a5f9;
+}
+
+.circleForeground.C {
+  stroke: #dd7df5;
 }

@@ -11,3 +11,7 @@
   margin-top: -7px;
   font-size: 0.9rem;
 }
+
+.yt_video iframe {
+  width: 100%;
+}

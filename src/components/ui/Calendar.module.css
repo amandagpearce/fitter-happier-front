@@ -1,0 +1,38 @@
+.A,
+.B,
+.C {
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 3px;
+}
+
+.A {
+  background-color: #04c4eb;
+  border: 1px solid #22d2f5;
+}
+
+.B {
+  background-color: #62a5f9;
+  border: 1px solid #7ab2f9;
+}
+
+.C {
+  background-color: #dd7df5;
+  border: 1px solid #e291f7;
+}
+
+.calendar {
+  font-size: 11px;
+  border-radius: 3px;
+  color: #fff;
+  padding: 7px 13px 13px;
+  background: linear-gradient(
+    to top,
+    #279fe2 0%,
+    #6b7fc9 86%,
+    #f3f3f3 20%,
+    #76b1fb 20%
+  );
+}
