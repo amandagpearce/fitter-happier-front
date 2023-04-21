@@ -98,9 +98,9 @@ const ExercisesLogger = ({ exercises }) => {
         })}
       </div>
 
-      <div className="col-xs-12 col-md-4">
+      {/* <div className="col-xs-12 col-md-4">
         <ExerciseCalendar loggedExercises={DUMMY_PREV_EXERCISES} />
-      </div>
+      </div> */}
     </div>
   );
 };

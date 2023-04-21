@@ -27,9 +27,9 @@ export default function Home({ exercises }) {
           <MyExercises />
         </Card>
 
-        <Card className="user-goals">
+        {/* <Card className="user-goals">
           <MyGoals />
-        </Card>
+        </Card> */}
       </div>
     </>
   );
