@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "../ui/Select";
 import Button from "../ui/Button";
-import Calendar from "react-calendar";
+import ExerciseCalendar from "../ui/Calendar";
 
 const ExercisesLogger = ({ exercises }) => {
+  let [currentSelectVal, setCurrentSelectVal] = useState("Hoje");
+
+  const onExerciseLogging = (type) => {
+    console.log("clicou", type);
+  };
+
+  const onSelectChange = (value) => {
+    console.log("select changed", value);
+  };
+
   return (
     <div className="row">
       <div className="exercises-logger-content col-8 row">
         <div className="exercise-selector col-2 ">
           <Select
-            options={["Ontem", "Hoje"]}
+            options={["Hoje", "Ontem"]}
             label="Fiz o exercício:"
             id="exercise-logger"
+            onChange={onSelectChange}
           />
         </div>
 
         {exercises.map((exercise) => {
           return (
             <div className="col-sm-2 col-md-2 col-xl-2" key={exercise.id}>
-              <Button title={exercise.type} size="large">
+              <Button
+                onClick={() => onExerciseLogging(exercise.type)}
+                title={exercise.type}
+                size="large"
+              >
                 {exercise.type}
               </Button>
             </div>
@@ -27,7 +42,7 @@ const ExercisesLogger = ({ exercises }) => {
       </div>
 
       <div className="col-xs-12 col-md-4">
-        <Calendar />
+        <ExerciseCalendar />
       </div>
     </div>
   );

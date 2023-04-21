@@ -5,7 +5,8 @@ import MyExercises from "@component/components/main/MyExercises";
 import MyGoals from "@component/components/main/MyGoals";
 // import { Sofia_Sans_Condensed } from "next/font/google";
 import { Merriweather_Sans } from "next/font/google";
-import classes from "./index.module.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "./index.module.css";
 
 const font = Merriweather_Sans({ subsets: ["latin"], weight: "400" });
 
@@ -17,9 +18,7 @@ export async function getServerSideProps() {
 export default function Home({ exercises }) {
   return (
     <>
-      <div
-        className={`${font.className} ${classes.appContainer} container-fluid`}
-      >
+      <div className={`${font.className} appContainer container-fluid`}>
         <Card className="exercises-logger">
           <ExercisesLogger exercises={exercises} />
         </Card>
