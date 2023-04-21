@@ -5,6 +5,8 @@ import Video from "../ui/Video";
 import Legend from "../ui/Legend";
 import Modal from "../ui/Modal";
 
+import NewExerciseForm from "./NewExerciseForm";
+
 const MyExercises = () => {
   const EXERCISES_DUMMY = [
     {
@@ -137,28 +139,30 @@ const MyExercises = () => {
         header="Novo exercício"
         contentClass="place-item__modal-content"
         footerClass="place-item__modal-actions"
-        footer={<Button onClick={closeModalHandler}>Close</Button>}
+        footer={<Button onClick={closeModalHandler}>Cancelar</Button>}
       >
-        <div className="newExercise">new exerciseeeee</div>
+        <div className="newExercise col-12">
+          <NewExerciseForm />
+        </div>
       </Modal>
 
       <Modal
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
-        header="Are you sure?"
+        header="Tem certeza?"
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
             <Button inverse onClick={cancelDeleteHandler}>
-              Cancel
+              Cancelar
             </Button>
             <Button danger onClick={confirmDeleteHandler}>
-              Delete
+              Excluir
             </Button>
           </React.Fragment>
         }
       >
-        <p>Do you really want to delete? This can't be undone.</p>
+        <p>Você realmente quer excluir? Essa ação não pode ser desfeita.</p>
       </Modal>
 
       {userExercises}
