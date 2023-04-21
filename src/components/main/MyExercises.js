@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "../ui/Button";
-import Link from "next/link";
 import Video from "../ui/Video";
 import Legend from "../ui/Legend";
+import Modal from "../ui/Modal";
 
 const MyExercises = () => {
   const EXERCISES_DUMMY = [
@@ -77,11 +77,37 @@ const MyExercises = () => {
     },
   ];
 
+  const [NewExerciseModal, setNewExerciseModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+  const onNewExerciseHandler = () => {
+    setNewExerciseModal(true);
+  };
+
+  const closeModalHandler = () => {
+    setNewExerciseModal(false);
+  };
+
+  const showDeleteWarningHandler = () => {
+    setShowConfirmModal(true);
+  };
+
+  const cancelDeleteHandler = () => {
+    setShowConfirmModal(false);
+  };
+
+  const confirmDeleteHandler = () => {
+    setShowConfirmModal(false);
+    console.log("DELETING");
+  };
+
   let userExercises = EXERCISES_DUMMY.map((exercise) => {
     return (
       <div className="exerciseContainer" key={exercise.id}>
         <Legend
           actions={true}
+          onDelete={showDeleteWarningHandler}
+          onClick={onNewExerciseHandler}
           background={true}
           description={exercise.name}
           title={exercise.type}
@@ -105,8 +131,38 @@ const MyExercises = () => {
 
   return (
     <React.Fragment>
+      <Modal
+        show={NewExerciseModal}
+        onCancel={closeModalHandler}
+        header="Novo exercício"
+        contentClass="place-item__modal-content"
+        footerClass="place-item__modal-actions"
+        footer={<Button onClick={closeModalHandler}>Close</Button>}
+      >
+        <div className="newExercise">new exerciseeeee</div>
+      </Modal>
+
+      <Modal
+        show={showConfirmModal}
+        onCancel={cancelDeleteHandler}
+        header="Are you sure?"
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={cancelDeleteHandler}>
+              Cancel
+            </Button>
+            <Button danger onClick={confirmDeleteHandler}>
+              Delete
+            </Button>
+          </React.Fragment>
+        }
+      >
+        <p>Do you really want to delete? This can't be undone.</p>
+      </Modal>
+
       {userExercises}
-      <Button size={"large"} title={"add"}>
+      <Button onClick={onNewExerciseHandler} size={"large"} title={"add"}>
         Novo exercício
       </Button>
     </React.Fragment>

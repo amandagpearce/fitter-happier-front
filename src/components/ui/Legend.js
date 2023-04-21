@@ -2,7 +2,14 @@ import Link from "next/link";
 import React from "react";
 import classes from "./Legend.module.css";
 
-const Legend = ({ title, description, background, actions }) => {
+const Legend = ({
+  title,
+  description,
+  background,
+  actions,
+  onDelete,
+  onClick,
+}) => {
   return (
     <div className={classes.legend}>
       <span className={classes[title]}>{title}</span>
@@ -15,10 +22,14 @@ const Legend = ({ title, description, background, actions }) => {
         {actions && (
           <ul>
             <li>
-              <Link href="#">Editar</Link>
+              <Link href="#" onClick={onClick}>
+                Editar
+              </Link>
             </li>
             <li>
-              <Link href="#">Excluir</Link>
+              <Link href="#" onClick={onDelete}>
+                Excluir
+              </Link>
             </li>
           </ul>
         )}
