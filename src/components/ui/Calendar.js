@@ -6,28 +6,7 @@ import classes from "./Calendar.module.css";
 
 const localizer = momentLocalizer(moment);
 
-let DUMMY_PREV_EXERCISES = [
-  {
-    title: "A",
-    start: new Date(2023, 3, 4), // year - month (starting at 0) - day
-    end: new Date(2023, 3, 4),
-    allDay: true,
-  },
-  {
-    title: "B",
-    start: new Date(2023, 3, 5), // year - month (starting at 0) - day
-    end: new Date(2023, 3, 4),
-    allDay: true,
-  },
-  {
-    title: "C",
-    start: new Date(2023, 3, 6), // year - month (starting at 0) - day
-    end: new Date(2023, 3, 4),
-    allDay: true,
-  },
-];
-
-const ExerciseCalendar = (props) => {
+const ExerciseCalendar = ({ loggedExercises }) => {
   const eventStyleGetter = useCallback(
     (event, start, end, isSelected) => ({
       ...(event.title.includes("A") && {
@@ -83,7 +62,7 @@ const ExerciseCalendar = (props) => {
         className={classes.calendar}
         localizer={localizer}
         culture="PT-BR"
-        events={DUMMY_PREV_EXERCISES}
+        events={loggedExercises}
         views={["month"]}
         messages={messages}
         dayPropGetter={calendarStyle}
