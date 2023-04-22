@@ -51,7 +51,7 @@ export default function Home() {
         </Card>
 
         <Card className="user-exercises" title="Meus Exercícios">
-          <MyExercises />
+          <MyExercises exercises={exercises} />
         </Card>
 
         {/* <Card className="user-goals">
