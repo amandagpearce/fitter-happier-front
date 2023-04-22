@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Button.module.css";
 
-const Button = ({ id, title, size, children, onClick, type }) => {
+const Button = ({ id, title, size, children, onClick, type, disabled }) => {
   return (
     <button
       className={`btn btn-primary ${classes.button} ${classes[size]} ${classes[title]}`}
@@ -10,6 +10,7 @@ const Button = ({ id, title, size, children, onClick, type }) => {
       autoComplete="on"
       type={type ? type : "button"}
       id={id}
+      disabled={disabled}
       onClick={onClick}
     >
       {children}

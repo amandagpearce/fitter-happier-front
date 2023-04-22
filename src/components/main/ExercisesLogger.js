@@ -10,6 +10,7 @@ const ExercisesLogger = ({ exercises }) => {
   let [currentSelectVal, setCurrentSelectVal] = useState("Hoje");
   const [newExerciseModal, setNewExerciseModal] = useState(false);
 
+  // TODO - CALENDAR EVENTS
   //   let DUMMY_PREV_EXERCISES = [
   //     {
   //       title: "A",
@@ -62,7 +63,8 @@ const ExercisesLogger = ({ exercises }) => {
         exercise_id: id,
       });
 
-      //   DUMMY_PREV_EXERCISES.push({ // TODO: - updating this wont't update calendar
+      // TODO: - updating this var wont't update calendar
+      //   DUMMY_PREV_EXERCISES.push({
       //     title: { type },
       //     start: new Date(year, month, day), // year - month (starting at 0) - day
       //     end: new Date(year, month, day),
@@ -115,13 +117,25 @@ const ExercisesLogger = ({ exercises }) => {
     content = (
       <React.Fragment>
         <Modal
-          animation={false}
           show={newExerciseModal}
           onCancel={closeModalHandler}
-          header="Novo exercício"
-          contentClass="place-item__modal-content"
-          footerClass="place-item__modal-actions"
-          footer={<Button onClick={closeModalHandler}>Cancelar</Button>}
+          header="Adicionar novo exercício"
+          contentClass="newExercise__modal-content"
+          footerClass="newExercise__modal-actions"
+          footer={
+            <Button title="closeModal" onClick={closeModalHandler}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x-lg"
+                viewBox="0 0 16 16"
+              >
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+              </svg>
+            </Button>
+          }
         >
           <div className="newExercise col-12">
             <NewExerciseForm />

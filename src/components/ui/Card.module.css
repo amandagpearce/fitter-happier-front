@@ -18,3 +18,19 @@
   letter-spacing: 0.5px;
   padding: 7px 10px;
 }
+
+.newExerciseModal {
+  margin: 0;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 25px 30px;
+}
+
+.newExerciseModal h4 {
+  color: #fff;
+  margin: 0 0 15px;
+}
+
+.newExerciseModal > .row {
+  margin-bottom: 20px !important;
+}
