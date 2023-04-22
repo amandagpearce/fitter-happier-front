@@ -8,7 +8,6 @@ import Select from "../ui/Select";
 const NewExerciseForm = () => {
   const newExerciseSubmitHandler = (event) => {
     event.preventDefault();
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
     console.log(formState.inputs);
   };
 
@@ -23,7 +22,7 @@ const NewExerciseForm = () => {
     false
   );
   return (
-    <form className="new-exercise-form" onsubmit={newExerciseSubmitHandler}>
+    <React.Fragment>
       <div className="row">
         <div className="col-2">
           <Select
@@ -62,10 +61,14 @@ const NewExerciseForm = () => {
         </div>
       </div>
 
-      <Button id="newExerciseForm" type="submit" disabled={!formState.isValid}>
+      <Button
+        id="newExerciseForm"
+        onClick={newExerciseSubmitHandler}
+        disabled={!formState.isValid}
+      >
         Adicionar exercício
       </Button>
-    </form>
+    </React.Fragment>
   );
 };
 

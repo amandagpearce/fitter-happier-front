@@ -35,6 +35,7 @@ const ModalOverlay = ({
       </form>
     </div>
   );
+
   return ReactDOM.createPortal(
     content,
     document.getElementById("modal-portal")
@@ -42,10 +43,12 @@ const ModalOverlay = ({
 };
 
 const Modal = (props) => {
+  const nodeRef = React.useRef(null);
   return (
     <React.Fragment>
       {props.show && <Backdrop onClick={props.onCancel} />}
       <CSSTransition
+        nodeRef={nodeRef}
         in={props.show}
         mountOnEnter
         unmountOnExit
