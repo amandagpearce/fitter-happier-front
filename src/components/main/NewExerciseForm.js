@@ -10,7 +10,11 @@ const NewExerciseForm = () => {
   const [formState, inputHandler] = useForm(
     // formState and inputHandler are returned in the hook
     {
-      title: {
+      exerciseTitle: {
+        value: "",
+        isValid: false,
+      },
+      1: {
         value: "",
         isValid: false,
       },
@@ -18,32 +22,71 @@ const NewExerciseForm = () => {
     false
   );
 
-  const input = (
-    <Input
-      element="input"
-      type="text"
-      label="Video ID:"
-      validators={[VALIDATOR_REQUIRE()]}
-      errorText="Por favor insira um ID válido."
-      onInput={inputHandler}
-    />
-  );
-
-  const [fields, setFields] = useState([input]);
+  const [fields, setFields] = useState([
+    <div className="col-6">
+      <Input
+        element="input"
+        type="text"
+        label="Video ID:"
+        identifier={1}
+        key={1}
+        id={1}
+        validators={[VALIDATOR_REQUIRE()]}
+        errorText="Por favor insira um ID válido."
+        onInput={inputHandler}
+      />
+    </div>,
+    <div className="col-6">
+      <Input
+        element="input"
+        type="text"
+        label="Title:"
+        key={2}
+        id={2}
+        identifier={2}
+        validators={[VALIDATOR_REQUIRE()]}
+        errorText="Por favor insira um ID válido."
+        onInput={inputHandler}
+      />
+    </div>,
+  ]);
 
   let onFieldDuplicate = (e) => {
     e.preventDefault();
-    setFields([...fields, input]);
+    setFields([
+      ...fields,
+      <div className="col-6">
+        <Input
+          element="input"
+          type="text"
+          label="Video ID:"
+          key={fields.length + 1}
+          id={fields.length + 1}
+          identifier={fields.length + 1}
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Por favor insira um ID válido."
+          onInput={inputHandler}
+        />
+      </div>,
+      <div className="col-6">
+        <Input
+          element="input"
+          type="text"
+          label="Title:"
+          key={fields.length + 2}
+          id={fields.length + 2}
+          identifier={fields.length + 2}
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Por favor insira um título válido."
+          onInput={inputHandler}
+        />
+      </div>,
+    ]);
   };
 
   const newExerciseSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(formState.inputs);
-  };
-
-  const onInputAddHandler = (event) => {
-    setInputNumber((prevNumber) => prevNumber++);
-    console.log("inputNumber", inputNumber);
+    console.log("formState", formState);
   };
 
   return (
@@ -63,7 +106,8 @@ const NewExerciseForm = () => {
               type="text"
               label="Título:"
               placeholder=""
-              id="title"
+              id="exerciseTitle"
+              identifier="newExerciseTitle"
               validators={[VALIDATOR_REQUIRE()]}
               errorText="Por favor insira uma descrição válida"
               onInput={inputHandler}
@@ -74,7 +118,7 @@ const NewExerciseForm = () => {
         <h4>Vídeos:</h4>
         <div className="row" style={{ maxHeight: "180px", overflowY: "auto" }}>
           <div className="col-10" style={{ paddingRight: "0" }}>
-            {fields}
+            <div className="row">{fields}</div>
           </div>
 
           <div className="col-2 row">

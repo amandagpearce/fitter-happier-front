@@ -108,3 +108,39 @@
 .closeModal {
   margin: 15px 10px;
 }
+
+.exerciseAction {
+  margin-left: 10px;
+  background: transparent;
+  border: none;
+}
+
+.deleteVideo {
+  background: #279fe2;
+  border: none;
+  display: flex;
+  margin-left: auto;
+  border-radius: 100%;
+  padding: 0.3em;
+  right: -11px;
+  top: 9px;
+  position: relative;
+}
+
+.deleteVideo:hover {
+  background: #fff;
+}
+
+.deleteVideo:hover svg {
+  fill: #ff0000;
+}
+
+.deleteVideo svg {
+  transform: scale(2.5);
+}
+
+.addNewVideo {
+  align-self: center;
+  width: auto;
+  justify-self: center;
+}

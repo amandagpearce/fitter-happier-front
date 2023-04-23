@@ -19,7 +19,8 @@
   padding: 7px 10px;
 }
 
-.newExerciseModal {
+.newExerciseModal,
+.deleteExercise {
   margin: 0;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -33,4 +34,14 @@
 
 .newExerciseModal > .row {
   margin-bottom: 20px !important;
+}
+
+.deleteExercise {
+  box-shadow: none;
+}
+
+.deleteExercise p {
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
 }

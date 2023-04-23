@@ -45,8 +45,11 @@
 
 .descriptionBackground > ul li a {
   color: #fff;
-  margin-left: 20px;
-  font-size: 1rem;
+  margin-left: 35px;
+}
+
+.descriptionBackground > ul li a svg {
+  transform: scale(1.4);
 }
 
 .A,

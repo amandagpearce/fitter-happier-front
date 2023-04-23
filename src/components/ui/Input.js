@@ -51,6 +51,7 @@ const Input = (props) => {
     props.element === "input" ? (
       <input
         id={props.id}
+        key={props.identifier}
         type={props.type}
         placeholder={props.placeholder}
         onChange={changeHandler}
@@ -69,7 +70,7 @@ const Input = (props) => {
 
   return (
     <div
-      className={`${classes.formControl} ${
+      className={`${classes.formControl} ${classes[props.className]} ${
         !inputState.isValid && inputState.isTouched && "form-control--invalid"
       }`}
     >

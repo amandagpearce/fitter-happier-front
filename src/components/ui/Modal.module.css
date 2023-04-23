@@ -31,7 +31,7 @@
 @media (min-width: 768px) {
   .modal {
     left: calc(53% - 20rem);
-    width: 30rem;
+    width: 40rem;
   }
 }
 
@@ -66,4 +66,18 @@
   margin: 5px 25px;
   font-weight: 600;
   font-size: 1.3em;
+}
+
+.deleteExerciseModal {
+  background: #279fe2;
+}
+
+.deleteExercise__modal-actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.deleteExercise__modal-actions button {
+  margin: 0 10px;
 }

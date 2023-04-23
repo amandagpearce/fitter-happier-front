@@ -4,6 +4,7 @@ import Button from "../ui/Button";
 import Video from "../ui/Video";
 import Legend from "../ui/Legend";
 import Modal from "../ui/Modal";
+import Card from "../ui/Card";
 
 import NewExerciseForm from "./NewExerciseForm";
 
@@ -11,6 +12,10 @@ const MyExercises = ({ exercises }) => {
   let userExercises;
   const [newExerciseModal, setNewExerciseModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [editMode1, setEditMode1] = useState(false);
+  const [editMode2, setEditMode2] = useState(false);
+  const [editMode3, setEditMode3] = useState(false);
+  const [deleteExercise, setDeleteExercise] = useState();
 
   const onNewExerciseHandler = () => {
     setNewExerciseModal(true);
@@ -20,27 +25,54 @@ const MyExercises = ({ exercises }) => {
     setNewExerciseModal(false);
   };
 
-  const showDeleteWarningHandler = () => {
+  const showDeleteWarningHandler = (exerciseId) => {
+    setDeleteExercise(exerciseId);
     setShowConfirmModal(true);
   };
 
   const cancelDeleteHandler = () => {
+    setDeleteExercise(undefined);
     setShowConfirmModal(false);
   };
 
   const confirmDeleteHandler = () => {
     setShowConfirmModal(false);
-    console.log("DELETING");
+
+    console.log("DELETING exercise id", deleteExercise);
+  };
+
+  // Not good should redo
+  const onEditHandler = (id) => {
+    console.log("executed", id);
+    if (id === 1) {
+      setEditMode1(true);
+    } else if (id === 2) {
+      setEditMode2(true);
+    } else {
+      setEditMode3(true);
+    }
   };
 
   if (exercises) {
     userExercises = exercises.map((exercise) => {
+      var editModeVar;
+      // bad, should redo
+      if (exercise.id === 1) {
+        editModeVar = editMode1;
+      } else if (exercise.id === 2) {
+        editModeVar = editMode2;
+      } else {
+        editModeVar = editMode3;
+      }
+
+      console.log({ editModeVar });
       return (
         <div className="exerciseContainer" key={exercise.id}>
           <Legend
             actions={true}
-            onDelete={showDeleteWarningHandler}
-            onClick={onNewExerciseHandler}
+            onDelete={() => showDeleteWarningHandler(exercise.id)}
+            onClick={() => onEditHandler(exercise.id)}
+            editMode={editModeVar}
             background={true}
             description={exercise.name}
             title={exercise.type}
@@ -53,10 +85,35 @@ const MyExercises = ({ exercises }) => {
                   key={counter}
                   className="col-xs-1 col-md-2 col-lg-4 col-xl-3"
                 >
-                  <Video yt_id={video.yt_id} title={video.title} />
+                  <Video
+                    id={video.id}
+                    editMode={editModeVar}
+                    yt_id={video.yt_id}
+                    title={video.title}
+                  />
                 </div>
               );
             })}
+
+            <div
+              className="col-xs-1 col-md-2 col-lg-4 col-xl-3"
+              style={{ display: "grid" }}
+            >
+              <Button title="addNewVideo">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-plus-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                </svg>
+                <br />
+                Adicionar vídeo
+              </Button>
+            </div>
           </div>
         </div>
       );
@@ -78,7 +135,7 @@ const MyExercises = ({ exercises }) => {
               width="16"
               height="16"
               fill="currentColor"
-              class="bi bi-x-lg"
+              className="bi bi-x-lg"
               viewBox="0 0 16 16"
             >
               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
@@ -92,10 +149,11 @@ const MyExercises = ({ exercises }) => {
       </Modal>
 
       <Modal
+        className="deleteExerciseModal"
         show={showConfirmModal}
         onCancel={cancelDeleteHandler}
         header="Tem certeza?"
-        footerClass="newExercise__modal-actions"
+        footerClass="deleteExercise__modal-actions"
         footer={
           <React.Fragment>
             <Button inverse onClick={cancelDeleteHandler}>
@@ -107,7 +165,12 @@ const MyExercises = ({ exercises }) => {
           </React.Fragment>
         }
       >
-        <p>Você realmente quer excluir? Essa ação não pode ser desfeita.</p>
+        <Card className="deleteExercise">
+          <p>
+            Você realmente quer excluir todo o exercício? <br />
+            Essa ação não pode ser desfeita.
+          </p>
+        </Card>
       </Modal>
 
       {exercises && userExercises}
