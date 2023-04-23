@@ -25,12 +25,7 @@ export async function logExercise(data) {
     requestOptions
   );
 
-  var status = response.status;
-  if (status === 201) {
-    return true;
-  } else {
-    return false;
-  }
+  return response.status;
 }
 
 export async function changeExerciseTitle(data) {
@@ -68,6 +63,27 @@ export async function deleteVideo(data) {
 
   var response = await fetch(
     "http://127.0.0.1:5000/video/" + data.video_id,
+    requestOptions
+  );
+
+  console.log("deleted");
+
+  return response;
+}
+
+export async function deleteExercise(id) {
+  console.log("ID", id);
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  var requestOptions = {
+    method: "DELETE",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  var response = await fetch(
+    "http://127.0.0.1:5000/exercise/" + id,
     requestOptions
   );
 

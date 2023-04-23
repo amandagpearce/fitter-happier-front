@@ -16,7 +16,6 @@ const ModalOverlay = ({
   footer,
   footerClass,
 }) => {
-  console.log("footerClass", footerClass);
   const content = (
     <div className={`${classes.modal} ${classes[className]}`} style={style}>
       <header className={`${classes.modal__header} ${classes[headerClass]}`}>

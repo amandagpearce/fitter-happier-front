@@ -7,7 +7,11 @@ import Modal from "../ui/Modal";
 import Card from "../ui/Card";
 
 import NewExerciseForm from "./NewExerciseForm";
-import { changeExerciseTitle, deleteVideo } from "@component/lib/exercise";
+import {
+  changeExerciseTitle,
+  deleteVideo,
+  deleteExercise,
+} from "@component/lib/exercise";
 
 const MyExercises = ({ exercises, onDataChange }) => {
   let userExercises;
@@ -16,7 +20,7 @@ const MyExercises = ({ exercises, onDataChange }) => {
   const [editMode1, setEditMode1] = useState(false);
   const [editMode2, setEditMode2] = useState(false);
   const [editMode3, setEditMode3] = useState(false);
-  const [deleteExercise, setDeleteExercise] = useState();
+  let [exerciseId, setExerciseId] = useState();
 
   const onNewExerciseHandler = () => {
     setNewExerciseModal(true);
@@ -26,20 +30,31 @@ const MyExercises = ({ exercises, onDataChange }) => {
     setNewExerciseModal(false);
   };
 
-  const showDeleteWarningHandler = (exerciseId) => {
-    setDeleteExercise(exerciseId);
+  const showDeleteWarningHandler = (exId) => {
+    setExerciseId(() => exId);
     setShowConfirmModal(true);
   };
 
   const cancelDeleteHandler = () => {
-    setDeleteExercise(undefined);
     setShowConfirmModal(false);
   };
 
   const confirmDeleteHandler = () => {
     setShowConfirmModal(false);
 
-    console.log("DELETING exercise id", deleteExercise);
+    const delExercise = async () => {
+      const response = await deleteExercise(exerciseId);
+
+      if (response.status === 200) {
+        onDataChange();
+      }
+    };
+
+    try {
+      delExercise();
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   // Not good should redo
