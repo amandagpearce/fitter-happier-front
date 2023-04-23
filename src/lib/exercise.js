@@ -20,11 +20,15 @@ export async function logExercise(data) {
     redirect: "follow",
   };
 
-  fetch(
+  var response = await fetch(
     "http://127.0.0.1:5000/exercise/log/" + data.exercise_id,
     requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
+  );
+
+  var status = response.status;
+  if (status === 201) {
+    return true;
+  } else {
+    return false;
+  }
 }

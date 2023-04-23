@@ -65,7 +65,6 @@ const MyExercises = ({ exercises }) => {
         editModeVar = editMode3;
       }
 
-      console.log({ editModeVar });
       return (
         <div className="exerciseContainer" key={exercise.id}>
           <Legend

@@ -5,10 +5,17 @@ import ExerciseCalendar from "../ui/Calendar";
 import { logExercise } from "@component/lib/exercise";
 import Modal from "../ui/Modal";
 import NewExerciseForm from "./NewExerciseForm";
+import StatusMessage from "../ui/StatusMessage";
 
 const ExercisesLogger = ({ exercises }) => {
   let [currentSelectVal, setCurrentSelectVal] = useState("Hoje");
   const [newExerciseModal, setNewExerciseModal] = useState(false);
+  const [showRequestMessage, setShowRequestMessage] = useState({
+    show: false,
+    message: undefined,
+    type: undefined,
+  });
+  const nodeRef = React.useRef(null);
 
   // TODO - CALENDAR EVENTS
   //   let DUMMY_PREV_EXERCISES = [
@@ -39,8 +46,7 @@ const ExercisesLogger = ({ exercises }) => {
     setNewExerciseModal(false);
   };
 
-  const onExerciseLogging = (type, id) => {
-    console.log("clicou", type);
+  const onExerciseLogging = async (type, id) => {
     let date, day, month, year, dateLog;
     date = new Date();
     month = date.getMonth();
@@ -53,9 +59,40 @@ const ExercisesLogger = ({ exercises }) => {
     }
 
     dateLog = `${year}-${month}-${day}`;
-    console.log("datelog", dateLog);
 
-    const saveLog = async (data) => await logExercise(data);
+    const saveLog = async (data) => {
+      const response = await logExercise(data);
+
+      if (!response) {
+        setShowRequestMessage({
+          show: true,
+          message: "Erro ao cadastrar treino :(",
+          type: "error",
+        });
+
+        setTimeout(() => {
+          setShowRequestMessage({
+            show: false,
+            message: undefined,
+            type: undefined,
+          });
+        }, 1800);
+      } else {
+        setShowRequestMessage({
+          show: true,
+          message: "Salvo com sucesso!",
+          type: "success",
+        });
+
+        setTimeout(() => {
+          setShowRequestMessage({
+            show: false,
+            message: undefined,
+            type: undefined,
+          });
+        }, 1800);
+      }
+    };
 
     try {
       saveLog({
@@ -76,7 +113,7 @@ const ExercisesLogger = ({ exercises }) => {
   };
 
   const onSelectChange = (value) => {
-    console.log("select changed", value);
+    // console.log("select changed", value);
     setCurrentSelectVal(() => (currentSelectVal = value));
   };
 
@@ -110,6 +147,14 @@ const ExercisesLogger = ({ exercises }) => {
         </div>
         <div className="exercises-logger-content col-10 row">
           {logExerciseButtons}
+          {showRequestMessage.show && (
+            <StatusMessage
+              type={showRequestMessage.type}
+              className="requestMessage"
+            >
+              {showRequestMessage.message}
+            </StatusMessage>
+          )}
         </div>
       </React.Fragment>
     );

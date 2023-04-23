@@ -1,0 +1,22 @@
+.requestMessage {
+  color: #fff;
+
+  margin: 15px 0 0;
+  display: block;
+  width: auto;
+  height: fit-content;
+  align-self: flex-end;
+  border-radius: 5px;
+}
+
+.requestMessage p {
+  margin: 0;
+}
+
+.requestMessage.success {
+  background: #17d100;
+}
+
+.requestMessage.error {
+  background: #d10038;
+}
