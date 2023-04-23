@@ -15,6 +15,7 @@ export default function Home() {
   const [exercises, setExercises] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [toggle, setToggle] = useState(false);
 
   const fetchExercisesHandler = useCallback(async () => {
     // useCallback here prevents loading loop due to useEffect
@@ -41,7 +42,8 @@ export default function Home() {
   useEffect(() => {
     // fetching data as soon as it loads
     fetchExercisesHandler();
-  }, [fetchExercisesHandler]);
+    console.log("fetchExercisesHandler() called");
+  }, [fetchExercisesHandler, toggle]);
 
   return (
     <>
@@ -53,7 +55,10 @@ export default function Home() {
         </Card>
 
         <Card className="user-exercises" title="Meus Exercícios">
-          <MyExercises exercises={exercises} />
+          <MyExercises
+            onDataChange={() => setToggle((prevState) => !prevState)}
+            exercises={exercises}
+          />
         </Card>
 
         {/* <Card className="user-goals">

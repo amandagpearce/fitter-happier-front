@@ -7,8 +7,9 @@ import Modal from "../ui/Modal";
 import Card from "../ui/Card";
 
 import NewExerciseForm from "./NewExerciseForm";
+import { changeExerciseTitle, deleteVideo } from "@component/lib/exercise";
 
-const MyExercises = ({ exercises }) => {
+const MyExercises = ({ exercises, onDataChange }) => {
   let userExercises;
   const [newExerciseModal, setNewExerciseModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -43,7 +44,6 @@ const MyExercises = ({ exercises }) => {
 
   // Not good should redo
   const onEditHandler = (id) => {
-    console.log("executed", id);
     if (id === 1) {
       setEditMode1(true);
     } else if (id === 2) {
@@ -53,10 +53,62 @@ const MyExercises = ({ exercises }) => {
     }
   };
 
+  const onTitleChangeHandler = (id, newTitle) => {
+    var data = {
+      exercise_id: id,
+      newTitle: newTitle,
+    };
+
+    const saveTitle = async (data) => {
+      const response = await changeExerciseTitle(data);
+      if (response.status === 200) {
+        onDataChange();
+      }
+    };
+
+    try {
+      saveTitle(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+
+    if (id === 1) {
+      setEditMode1(false);
+    } else if (id === 2) {
+      setEditMode2(false);
+    } else {
+      setEditMode3(false);
+    }
+  };
+
+  const onDeleteVideoHandler = (data) => {
+    const delVideo = async (data) => {
+      const response = await deleteVideo(data);
+      console.log(response.status);
+      if (response.status === 200) {
+        onDataChange();
+      }
+    };
+
+    try {
+      delVideo(data);
+    } catch (error) {
+      console.log("error", error);
+    }
+
+    if (data.exercise_id === 1) {
+      setEditMode1(false);
+    } else if (data.exercise_id === 2) {
+      setEditMode2(false);
+    } else {
+      setEditMode3(false);
+    }
+  };
+
   if (exercises) {
     userExercises = exercises.map((exercise) => {
       var editModeVar;
-      // bad, should redo
+      // bad, should research and redo
       if (exercise.id === 1) {
         editModeVar = editMode1;
       } else if (exercise.id === 2) {
@@ -71,6 +123,9 @@ const MyExercises = ({ exercises }) => {
             actions={true}
             onDelete={() => showDeleteWarningHandler(exercise.id)}
             onClick={() => onEditHandler(exercise.id)}
+            onDataChange={(newTitle) =>
+              onTitleChangeHandler(exercise.id, newTitle)
+            }
             editMode={editModeVar}
             background={true}
             description={exercise.name}
@@ -89,6 +144,8 @@ const MyExercises = ({ exercises }) => {
                     editMode={editModeVar}
                     yt_id={video.yt_id}
                     title={video.title}
+                    exercise_Id={exercise.id}
+                    onDataChange={(data) => onDeleteVideoHandler(data)}
                   />
                 </div>
               );

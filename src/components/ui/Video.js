@@ -3,7 +3,7 @@ import YouTube from "react-youtube";
 import classes from "./Video.module.css";
 import Button from "./Button";
 
-const Video = ({ yt_id, title, editMode, id }) => {
+const Video = ({ yt_id, title, editMode, id, exercise_id, onDataChange }) => {
   const yt_opts = {
     height: "",
     width: "",
@@ -20,6 +20,12 @@ const Video = ({ yt_id, title, editMode, id }) => {
 
   const onDeleteVideo = () => {
     console.log("delete video id", id);
+    var data = {
+      video_id: id,
+      exercise_id: exercise_id,
+    };
+
+    onDataChange(data);
   };
 
   return (
