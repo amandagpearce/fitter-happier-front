@@ -12,7 +12,7 @@ import { useState, useCallback, useEffect } from "react";
 const font = Merriweather_Sans({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
-  const [exercises, setExercises] = useState([]);
+  let [exercises, setExercises] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [toggle, setToggle] = useState(false);
@@ -25,13 +25,13 @@ export default function Home() {
 
     try {
       const response = await getExercises();
-      console.log("response", response);
 
-      if (!response.length) {
-        throw new Error("Algo deu errado!");
-      }
+      //   if (!response.length) {
+      //     throw new Error("Algo deu errado!");
+      //   }
 
-      setExercises(() => response);
+      setExercises(() => (exercises = response));
+
       console.log("exercises", exercises);
     } catch (error) {
       setError(error.message);
@@ -50,9 +50,11 @@ export default function Home() {
       <div
         className={`${font.className} ${classes.appContainer} container-fluid`}
       >
-        <Card className="exercises-logger">
-          <ExercisesLogger exercises={exercises} />
-        </Card>
+        {!!exercises.length && (
+          <Card className="exercisesLogger">
+            <ExercisesLogger exercises={exercises} />
+          </Card>
+        )}
 
         <Card className="user-exercises" title="Meus Exercícios">
           <MyExercises

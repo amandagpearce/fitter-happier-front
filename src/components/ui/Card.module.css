@@ -5,10 +5,9 @@
   margin-bottom: 20px;
 }
 
-.exercises-logger {
-  top: -70px;
-  margin-bottom: -50px;
-  position: relative;
+.isEmpty {
+  opacity: 0;
+  margin-bottom: -100px;
 }
 
 .title {

@@ -1,3 +1,9 @@
 .appContainer {
   max-width: 1360px;
 }
+
+.appContainer > div:first-of-type {
+  top: -70px;
+  margin-bottom: -50px;
+  position: relative;
+}

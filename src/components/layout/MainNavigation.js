@@ -1,6 +1,6 @@
 import classes from "./MainNavigation.module.css";
-import Link from "next/link";
 import { Bowlby_One } from "next/font/google";
+import Link from "next/link";
 
 const logoFont = Bowlby_One({ subsets: ["latin"], weight: "400" });
 
@@ -20,17 +20,12 @@ function MainNavigation() {
             <ul className="navbar-nav">
               <li className="nav-item active">
                 <Link className="nav-link" href="/">
-                  Home <span className="sr-only">(current)</span>
+                  Home
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item active">
                 <Link className="nav-link" href="/">
-                  Features
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/">
-                  Pricing
+                  Login
                 </Link>
               </li>
             </ul>

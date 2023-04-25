@@ -7,6 +7,8 @@ import Modal from "../ui/Modal";
 import Card from "../ui/Card";
 
 import NewExerciseForm from "./NewExerciseForm";
+import NewExerciseVideoForm from "./NewExerciseVideoForm";
+
 import {
   changeExerciseTitle,
   deleteVideo,
@@ -15,12 +17,20 @@ import {
 
 const MyExercises = ({ exercises, onDataChange }) => {
   let userExercises;
-  const [newExerciseModal, setNewExerciseModal] = useState(false);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [editMode1, setEditMode1] = useState(false);
-  const [editMode2, setEditMode2] = useState(false);
-  const [editMode3, setEditMode3] = useState(false);
+  let [newExerciseModal, setNewExerciseModal] = useState(false);
+  let [newVideoModal, setNewVideoModal] = useState({
+    show: false,
+    id: undefined,
+  });
+  let [showConfirmModal, setShowConfirmModal] = useState(false);
+  let [editMode1, setEditMode1] = useState(false);
+  let [editMode2, setEditMode2] = useState(false);
+  let [editMode3, setEditMode3] = useState(false);
   let [exerciseId, setExerciseId] = useState();
+
+  const onNewVideoHandler = (id) => {
+    setNewVideoModal({ show: true, id: id });
+  };
 
   const onNewExerciseHandler = () => {
     setNewExerciseModal(true);
@@ -110,7 +120,7 @@ const MyExercises = ({ exercises, onDataChange }) => {
     } catch (error) {
       console.log("error", error);
     }
-
+    console.log("data.exercise_id", data.exercise_id);
     if (data.exercise_id === 1) {
       setEditMode1(false);
     } else if (data.exercise_id === 2) {
@@ -170,7 +180,11 @@ const MyExercises = ({ exercises, onDataChange }) => {
               className="col-xs-1 col-md-2 col-lg-4 col-xl-3"
               style={{ display: "grid" }}
             >
-              <Button title="addNewVideo">
+              <Button
+                title="addNewVideo"
+                addToExercise={exercise.id}
+                onClick={(id) => onNewVideoHandler(id)}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -215,7 +229,12 @@ const MyExercises = ({ exercises, onDataChange }) => {
         }
       >
         <div className="newExercise col-12">
-          <NewExerciseForm />
+          <NewExerciseForm
+            onNewExerciseCreated={() => {
+              closeModalHandler();
+              onDataChange();
+            }}
+          />
         </div>
       </Modal>
 
@@ -242,6 +261,38 @@ const MyExercises = ({ exercises, onDataChange }) => {
             Essa ação não pode ser desfeita.
           </p>
         </Card>
+      </Modal>
+
+      <Modal
+        show={newVideoModal.show}
+        onCancel={closeModalHandler}
+        header="Adicionar novo vídeo ao exercício"
+        contentClass="newVideo__modal-content"
+        footerClass="newVideo__modal-actions"
+        footer={
+          <Button title="closeModal" onClick={closeModalHandler}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-x-lg"
+              viewBox="0 0 16 16"
+            >
+              <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+            </svg>
+          </Button>
+        }
+      >
+        <div className="newVideo col-12">
+          <NewExerciseVideoForm
+            exerciseId={newVideoModal.id}
+            onNewVideoCreated={() => {
+              closeModalHandler();
+              onDataChange();
+            }}
+          />
+        </div>
       </Modal>
 
       {exercises && userExercises}

@@ -5,8 +5,15 @@ import Button from "../ui/Button";
 import { useForm } from "../../hooks/form-hook";
 import Select from "../ui/Select";
 import Card from "../ui/Card";
+import {
+  addNewVideo,
+  addNewExercise,
+  addVideoToExercise,
+} from "@component/lib/exercise";
 
-const NewExerciseForm = () => {
+const NewExerciseForm = ({ onNewExerciseCreated }) => {
+  let [currentSelectVal, setCurrentSelectVal] = useState("A");
+
   const [formState, inputHandler] = useForm(
     // formState and inputHandler are returned in the hook
     {
@@ -14,7 +21,11 @@ const NewExerciseForm = () => {
         value: "",
         isValid: false,
       },
-      1: {
+      ytId_1: {
+        value: "",
+        isValid: false,
+      },
+      videoTitle_1: {
         value: "",
         isValid: false,
       },
@@ -22,7 +33,12 @@ const NewExerciseForm = () => {
     false
   );
 
-  const [fields, setFields] = useState([
+  const onSelectChange = (value) => {
+    console.log("value", value);
+    setCurrentSelectVal(() => value);
+  };
+
+  let [fields, setFields] = useState([
     <div className="col-6">
       <Input
         element="input"
@@ -30,7 +46,7 @@ const NewExerciseForm = () => {
         label="Video ID:"
         identifier={1}
         key={1}
-        id={1}
+        id="ytId_1"
         validators={[VALIDATOR_REQUIRE()]}
         errorText="Por favor insira um ID válido."
         onInput={inputHandler}
@@ -40,9 +56,9 @@ const NewExerciseForm = () => {
       <Input
         element="input"
         type="text"
-        label="Title:"
+        label="Título:"
         key={2}
-        id={2}
+        id="videoTitle_1"
         identifier={2}
         validators={[VALIDATOR_REQUIRE()]}
         errorText="Por favor insira um ID válido."
@@ -61,8 +77,8 @@ const NewExerciseForm = () => {
           type="text"
           label="Video ID:"
           key={fields.length + 1}
-          id={fields.length + 1}
-          identifier={fields.length + 1}
+          id={`ytId_${fields.length}`}
+          //   identifier={fields.length}
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Por favor insira um ID válido."
           onInput={inputHandler}
@@ -72,10 +88,10 @@ const NewExerciseForm = () => {
         <Input
           element="input"
           type="text"
-          label="Title:"
-          key={fields.length + 2}
-          id={fields.length + 2}
-          identifier={fields.length + 2}
+          label="Título:"
+          key={fields.length + 1}
+          id={`videoTitle_${fields.length}`}
+          //   identifier={fields.length + 2}
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Por favor insira um título válido."
           onInput={inputHandler}
@@ -84,9 +100,68 @@ const NewExerciseForm = () => {
     ]);
   };
 
-  const newExerciseSubmitHandler = (event) => {
+  const buildVideosArray = (data) => {
+    let array = [];
+
+    for (const key1 in data) {
+      var id = key1.split("_")[1];
+      console.log("id", id);
+
+      if (key1.indexOf("ytId") > -1) {
+        var tempObj = {};
+        tempObj["yt_id"] = data[key1].value;
+
+        for (const key2 in data) {
+          var id2 = key2.split("_")[1];
+          if (key2.indexOf("videoTitle") > -1 && id2 === id) {
+            tempObj["title"] = data[key2].value;
+
+            array.push(tempObj);
+          }
+        }
+      }
+    }
+
+    return array;
+  };
+
+  const newExerciseSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("formState", formState);
+
+    // data to create new exercise
+    var newExercise = {
+      name: formState.inputs.exerciseTitle.value,
+      type: currentSelectVal,
+      user_id: "10",
+    };
+
+    let videos = Object.fromEntries(
+      Object.entries(formState.inputs).filter(
+        ([key]) => key.includes("videoTitle") || key.includes("ytId")
+      )
+    );
+
+    // array to create new videos
+    let videosArr = buildVideosArray(videos);
+
+    try {
+      await addNewExercise(newExercise).then(async (res1) => {
+        for (var x = 0; x < videosArr.length; x++) {
+          await addNewVideo(videosArr[x]).then(async (res2) => {
+            var data = {
+              exercise_id: res1.newExerciseId,
+              video_id: res2.newVideoId,
+            };
+
+            await addVideoToExercise(data).then(() => {
+              onNewExerciseCreated();
+            });
+          });
+        }
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (
@@ -96,8 +171,10 @@ const NewExerciseForm = () => {
           <div className="col-2">
             <Select
               name="Selecione o exercício"
-              id="newExercise"
+              id="newExerciseType"
               options={["A", "B", "C"]}
+              onChange={onSelectChange}
+              validators={[VALIDATOR_REQUIRE()]}
             />
           </div>
           <div className="col-10">
