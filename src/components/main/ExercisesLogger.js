@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "../ui/Select";
 import Button from "../ui/Button";
+// import ExerciseCalendar from "../ui/Calendar";
 import { logExercise } from "@component/lib/exercise";
 import StatusMessage from "../ui/StatusMessage";
 
@@ -11,6 +12,28 @@ const ExercisesLogger = ({ exercises }) => {
     message: undefined,
     type: undefined,
   });
+
+  // TODO - CALENDAR EVENTS
+  //   let DUMMY_PREV_EXERCISES = [
+  //     {
+  //       title: "A",
+  //       start: new Date(2023, 3, 4), // year - month (starting at 0) - day
+  //       end: new Date(2023, 3, 4),
+  //       allDay: true,
+  //     },
+  //     {
+  //       title: "B",
+  //       start: new Date(2023, 3, 5), // year - month (starting at 0) - day
+  //       end: new Date(2023, 3, 4),
+  //       allDay: true,
+  //     },
+  //     {
+  //       title: "C",
+  //       start: new Date(2023, 3, 6), // year - month (starting at 0) - day
+  //       end: new Date(2023, 3, 4),
+  //       allDay: true,
+  //     },
+  //   ];
 
   const onExerciseLogging = async (type, id) => {
     let date, day, month, year, dateLog;
@@ -65,12 +88,21 @@ const ExercisesLogger = ({ exercises }) => {
         date: dateLog,
         exercise_id: id,
       });
+
+      // TODO: - updating this var wont't update calendar
+      //   DUMMY_PREV_EXERCISES.push({
+      //     title: { type },
+      //     start: new Date(year, month, day), // year - month (starting at 0) - day
+      //     end: new Date(year, month, day),
+      //     allDay: true,
+      //   });
     } catch (error) {
       console.log("error", error);
     }
   };
 
   const onSelectChange = (value) => {
+    // console.log("select changed", value);
     setCurrentSelectVal(() => (currentSelectVal = value));
   };
 
@@ -117,7 +149,15 @@ const ExercisesLogger = ({ exercises }) => {
     );
   }
 
-  return <div className="row">{content}</div>;
+  return (
+    <div className="row">
+      {content}
+
+      {/* <div className="col-xs-12 col-md-4">
+        <ExerciseCalendar loggedExercises={DUMMY_PREV_EXERCISES} />
+      </div> */}
+    </div>
+  );
 };
 
 export default ExercisesLogger;
