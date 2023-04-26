@@ -21,7 +21,8 @@
   padding: 0;
 }
 
-.newExercise__modal-actions {
+.newExercise__modal-actions,
+.newVideo__modal-actions {
   position: absolute;
   right: 0;
   top: 0;

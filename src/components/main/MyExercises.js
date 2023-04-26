@@ -38,6 +38,7 @@ const MyExercises = ({ exercises, onDataChange }) => {
 
   const closeModalHandler = () => {
     setNewExerciseModal(false);
+    setNewVideoModal({ show: false, id: undefined });
   };
 
   const showDeleteWarningHandler = (exId) => {
@@ -183,7 +184,7 @@ const MyExercises = ({ exercises, onDataChange }) => {
               <Button
                 title="addNewVideo"
                 addToExercise={exercise.id}
-                onClick={(id) => onNewVideoHandler(id)}
+                onClick={() => onNewVideoHandler(exercise.id)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

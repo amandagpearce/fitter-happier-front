@@ -51,7 +51,7 @@ const Input = (props) => {
     props.element === "input" ? (
       <input
         id={props.id}
-        key={props.identifier}
+        key={props.id}
         type={props.type}
         placeholder={props.placeholder}
         onChange={changeHandler}

@@ -39,29 +39,25 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
   };
 
   let [fields, setFields] = useState([
-    <div className="col-6">
+    <div className="col-6" key="1">
       <Input
         element="input"
         type="text"
         label="Video ID:"
-        identifier={1}
-        key={1}
         id="ytId_1"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Por favor insira um ID válido."
+        errorText="Por favor insira uma URL do youtube."
         onInput={inputHandler}
       />
     </div>,
-    <div className="col-6">
+    <div className="col-6" key="2">
       <Input
         element="input"
         type="text"
         label="Título:"
-        key={2}
         id="videoTitle_1"
-        identifier={2}
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Por favor insira um ID válido."
+        errorText="Por favor insira um título válido."
         onInput={inputHandler}
       />
     </div>,
@@ -71,27 +67,23 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
     e.preventDefault();
     setFields([
       ...fields,
-      <div className="col-6">
+      <div className="col-6" key={`ytId_${fields.length}`}>
         <Input
           element="input"
           type="text"
           label="Video ID:"
-          key={fields.length + 1}
           id={`ytId_${fields.length}`}
-          //   identifier={fields.length}
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Por favor insira um ID válido."
           onInput={inputHandler}
         />
       </div>,
-      <div className="col-6">
+      <div className="col-6" key={`videoTitle_${fields.length}`}>
         <Input
           element="input"
           type="text"
           label="Título:"
-          key={fields.length + 1}
           id={`videoTitle_${fields.length}`}
-          //   identifier={fields.length + 2}
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Por favor insira um título válido."
           onInput={inputHandler}

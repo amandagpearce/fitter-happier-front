@@ -24,27 +24,23 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
   );
 
   let [fields, setFields] = useState([
-    <div className="col-6">
+    <div className="col-6" key="ytId_1">
       <Input
         element="input"
         type="text"
-        label="Video ID:"
-        identifier={1}
-        key={1}
+        label="URL:"
         id="ytId_1"
         validators={[VALIDATOR_REQUIRE()]}
         errorText="Por favor insira um ID válido."
         onInput={inputHandler}
       />
     </div>,
-    <div className="col-6">
+    <div className="col-6" key="videoTitle_1">
       <Input
         element="input"
         type="text"
         label="Título:"
-        key={2}
         id="videoTitle_1"
-        identifier={2}
         validators={[VALIDATOR_REQUIRE()]}
         errorText="Por favor insira um ID válido."
         onInput={inputHandler}
@@ -56,27 +52,25 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
     e.preventDefault();
     setFields([
       ...fields,
-      <div className="col-6">
+      <div className="col-6" key={`ytId_${fields.length}`}>
         <Input
           element="input"
           type="text"
           label="Video ID:"
           key={fields.length + 1}
           id={`ytId_${fields.length}`}
-          //   identifier={fields.length}
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Por favor insira um ID válido."
           onInput={inputHandler}
         />
       </div>,
-      <div className="col-6">
+      <div className="col-6" key={`videoTitle_${fields.length}`}>
         <Input
           element="input"
           type="text"
           label="Título:"
           key={fields.length + 1}
           id={`videoTitle_${fields.length}`}
-          //   identifier={fields.length + 2}
           validators={[VALIDATOR_REQUIRE()]}
           errorText="Por favor insira um título válido."
           onInput={inputHandler}
@@ -94,7 +88,14 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
 
       if (key1.indexOf("ytId") > -1) {
         var tempObj = {};
-        tempObj["yt_id"] = data[key1].value;
+
+        var video_id = data[key1].value.split("v=")[1];
+        var ampersandPosition = video_id.indexOf("&");
+        if (ampersandPosition != -1) {
+          video_id = video_id.substring(0, ampersandPosition);
+        }
+        tempObj["yt_id"] = video_id;
+        console.log("video_id", video_id);
 
         for (const key2 in data) {
           var id2 = key2.split("_")[1];
