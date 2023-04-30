@@ -28,10 +28,10 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
       <Input
         element="input"
         type="text"
-        label="URL:"
+        label="Link do vídeo:"
         id="ytId_1"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Por favor insira um ID válido."
+        errorText="Link do youtube"
         onInput={inputHandler}
       />
     </div>,
@@ -42,7 +42,7 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
         label="Título:"
         id="videoTitle_1"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Por favor insira um ID válido."
+        errorText="Insira um título"
         onInput={inputHandler}
       />
     </div>,
@@ -60,7 +60,7 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
           key={fields.length + 1}
           id={`ytId_${fields.length}`}
           validators={[VALIDATOR_REQUIRE()]}
-          errorText="Por favor insira um ID válido."
+          errorText="Link do youtube"
           onInput={inputHandler}
         />
       </div>,
@@ -72,7 +72,7 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
           key={fields.length + 1}
           id={`videoTitle_${fields.length}`}
           validators={[VALIDATOR_REQUIRE()]}
-          errorText="Por favor insira um título válido."
+          errorText="Insira um título"
           onInput={inputHandler}
         />
       </div>,

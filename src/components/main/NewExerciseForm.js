@@ -43,10 +43,10 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
       <Input
         element="input"
         type="text"
-        label="Video ID:"
+        label="Link do vídeo:"
         id="ytId_1"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Por favor insira uma URL do youtube."
+        errorText="Link do youtube"
         onInput={inputHandler}
       />
     </div>,
@@ -57,7 +57,7 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
         label="Título:"
         id="videoTitle_1"
         validators={[VALIDATOR_REQUIRE()]}
-        errorText="Por favor insira um título válido."
+        errorText="Insira um título"
         onInput={inputHandler}
       />
     </div>,
@@ -71,10 +71,10 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
         <Input
           element="input"
           type="text"
-          label="Video ID:"
+          label="Link do vídeo:"
           id={`ytId_${fields.length}`}
           validators={[VALIDATOR_REQUIRE()]}
-          errorText="Por favor insira um ID válido."
+          errorText="Link do youtube"
           onInput={inputHandler}
         />
       </div>,
@@ -85,7 +85,7 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
           label="Título:"
           id={`videoTitle_${fields.length}`}
           validators={[VALIDATOR_REQUIRE()]}
-          errorText="Por favor insira um título válido."
+          errorText="Insira um título"
           onInput={inputHandler}
         />
       </div>,
@@ -101,7 +101,14 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
 
       if (key1.indexOf("ytId") > -1) {
         var tempObj = {};
-        tempObj["yt_id"] = data[key1].value;
+
+        var video_id = data[key1].value.split("v=")[1];
+        var ampersandPosition = video_id.indexOf("&");
+        if (ampersandPosition != -1) {
+          video_id = video_id.substring(0, ampersandPosition);
+        }
+        tempObj["yt_id"] = video_id;
+        console.log("video_id", video_id);
 
         for (const key2 in data) {
           var id2 = key2.split("_")[1];
@@ -139,7 +146,10 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
     try {
       await addNewExercise(newExercise).then(async (res1) => {
         for (var x = 0; x < videosArr.length; x++) {
+          console.log("videosArr[x]", x, videosArr[x]);
+
           await addNewVideo(videosArr[x]).then(async (res2) => {
+            console.log("res2.newVideoId", res2.newVideoId);
             var data = {
               exercise_id: res1.newExerciseId,
               video_id: res2.newVideoId,
