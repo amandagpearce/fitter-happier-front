@@ -15,22 +15,6 @@ function MainNavigation() {
           <p>Fitter Happier</p>
           <img src="/logo.png" className="d-inline-block align-top" alt="" />
         </Link>
-        <nav className="navbar navbar-expand">
-          <div className="navbar-nav" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item active">
-                <Link className="nav-link" href="/">
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item active">
-                <Link className="nav-link" href="/">
-                  Login
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
       </div>
     </header>
   );
