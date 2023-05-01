@@ -29,13 +29,6 @@
   font-size: 1.8em;
 }
 
-@media (min-width: 768px) {
-  .modal {
-    left: calc(53% - 20rem);
-    width: 40rem;
-  }
-}
-
 .modal-enter {
   transform: translateY(-10rem);
   opacity: 0;
@@ -81,4 +74,11 @@
 
 .deleteExercise__modal-actions button {
   margin: 0 10px;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    left: calc(45% - 20rem);
+    width: 55rem;
+  }
 }

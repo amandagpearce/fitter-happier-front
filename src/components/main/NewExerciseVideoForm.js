@@ -151,11 +151,11 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
         </div>
 
         <div className="row" style={{ maxHeight: "180px", overflowY: "auto" }}>
-          <div className="col-10" style={{ paddingRight: "0" }}>
+          <div className="col-11" style={{ paddingRight: "0" }}>
             <div className="row">{fields}</div>
           </div>
 
-          <div className="col-2 row">
+          <div className="col-1 row">
             <Button onClick={onFieldDuplicate} title="addVideo">
               +
             </Button>
@@ -168,7 +168,7 @@ const NewExerciseVideoForm = ({ onNewVideoCreated, exerciseId }) => {
           size={"large"}
           title={"modalAdd"}
         >
-          Adicionar exercício
+          Adicionar vídeo
         </Button>
       </Card>
     </React.Fragment>

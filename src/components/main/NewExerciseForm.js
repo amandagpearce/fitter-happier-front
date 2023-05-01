@@ -131,7 +131,7 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
     var newExercise = {
       name: formState.inputs.exerciseTitle.value,
       type: currentSelectVal,
-      user_id: "10",
+      //   user_id: "10",
     };
 
     let videos = Object.fromEntries(
@@ -170,7 +170,7 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
     <React.Fragment>
       <Card className="newExerciseModal">
         <div className="row">
-          <div className="col-2">
+          <div className="col-1">
             <Select
               name="Selecione o exercício"
               id="newExerciseType"
@@ -179,7 +179,7 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
               validators={[VALIDATOR_REQUIRE()]}
             />
           </div>
-          <div className="col-10">
+          <div className="col-11">
             <Input
               element="input"
               type="text"
@@ -196,11 +196,11 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
 
         <h4>Vídeos:</h4>
         <div className="row" style={{ maxHeight: "180px", overflowY: "auto" }}>
-          <div className="col-10" style={{ paddingRight: "0" }}>
+          <div className="col-11" style={{ paddingRight: "0" }}>
             <div className="row">{fields}</div>
           </div>
 
-          <div className="col-2 row">
+          <div className="col-1 row">
             <Button onClick={onFieldDuplicate} title="addVideo">
               +
             </Button>
