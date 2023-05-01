@@ -107,7 +107,7 @@ const MyExercises = ({ exercises, onDataChange }) => {
     }
   };
 
-  const onDeleteVideoHandler = (data) => {
+  const onDeleteVideoHandler = (data, exerciseId) => {
     const delVideo = async (data) => {
       const response = await deleteVideo(data);
       console.log(response.status);
@@ -121,10 +121,10 @@ const MyExercises = ({ exercises, onDataChange }) => {
     } catch (error) {
       console.log("error", error);
     }
-    console.log("data.exercise_id", data.exercise_id);
-    if (data.exercise_id === 1) {
+
+    if (exerciseId === 1) {
       setEditMode1(false);
-    } else if (data.exercise_id === 2) {
+    } else if (exerciseId === 2) {
       setEditMode2(false);
     } else {
       setEditMode3(false);
@@ -171,7 +171,9 @@ const MyExercises = ({ exercises, onDataChange }) => {
                     yt_id={video.yt_id}
                     title={video.title}
                     exercise_Id={exercise.id}
-                    onDataChange={(data) => onDeleteVideoHandler(data)}
+                    onDataChange={(data) =>
+                      onDeleteVideoHandler(data, exercise.id)
+                    }
                   />
                 </div>
               );
