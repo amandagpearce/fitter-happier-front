@@ -1,13 +1,15 @@
-import { getExercises } from "@component/lib/exercise";
+import { useState, useCallback, useEffect } from "react";
+
 import Card from "@component/components/ui/Card";
 import ExercisesLogger from "@component/components/main/ExercisesLogger";
 import MyExercises from "@component/components/main/MyExercises";
+import MyGoals from "@component/components/main/MyGoals";
+
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import classes from "./index.module.css";
 
 import { Merriweather_Sans } from "next/font/google";
-// import MyGoals from "@component/components/main/MyGoals";
-// import "react-big-calendar/lib/css/react-big-calendar.css";
-import classes from "./index.module.css";
-import { useState, useCallback, useEffect } from "react";
+import { getExercises } from "@component/lib/exercise";
 
 const font = Merriweather_Sans({ subsets: ["latin"], weight: "400" });
 
@@ -63,9 +65,9 @@ export default function Home() {
           />
         </Card>
 
-        {/* <Card className="user-goals">
+        <Card className="user-goals">
           <MyGoals />
-        </Card> */}
+        </Card>
       </div>
     </>
   );
