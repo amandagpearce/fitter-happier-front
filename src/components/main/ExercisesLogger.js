@@ -3,6 +3,7 @@ import Select from "../ui/Select";
 import Button from "../ui/Button";
 import { logExercise } from "@component/lib/exercise";
 import StatusMessage from "../ui/StatusMessage";
+import ExerciseCalendar from "../ui/Calendar";
 
 const ExercisesLogger = ({ exercises }) => {
   let [currentSelectVal, setCurrentSelectVal] = useState("Hoje");
@@ -79,7 +80,7 @@ const ExercisesLogger = ({ exercises }) => {
   if (exercises.length) {
     var logExerciseButtons = exercises.map((exercise) => {
       return (
-        <div className="col-sm-2 col-md-2 col-xl-2" key={exercise.id}>
+        <div className="col-3" key={exercise.id}>
           <Button
             id={exercise.id}
             onClick={() => onExerciseLogging(exercise.type, exercise.id)}
@@ -102,7 +103,7 @@ const ExercisesLogger = ({ exercises }) => {
             onChange={onSelectChange}
           />
         </div>
-        <div className="exercises-logger-content col-10 row">
+        <div className="exercises-logger-content col-6 row">
           {logExerciseButtons}
           {showRequestMessage.show && (
             <StatusMessage
@@ -112,6 +113,10 @@ const ExercisesLogger = ({ exercises }) => {
               {showRequestMessage.message}
             </StatusMessage>
           )}
+        </div>
+
+        <div className="exercises-calendar col-4 row ms-auto g-0">
+          <ExerciseCalendar />
         </div>
       </React.Fragment>
     );
