@@ -1,5 +1,5 @@
 export async function getExercises() {
-  const response = await fetch("http://127.0.0.1:5000/exercise");
+  const response = await fetch("http://localhost:5000/exercise");
   const exercises = await response.json();
   return exercises;
 }
@@ -21,7 +21,7 @@ export async function logExercise(data) {
   };
 
   var response = await fetch(
-    "http://127.0.0.1:5000/exercise/log/" + data.exercise_id,
+    "http://localhost:5000/exercise/log/" + data.exercise_id,
     requestOptions
   );
 
@@ -44,7 +44,7 @@ export async function changeExerciseTitle(data) {
   };
 
   var response = await fetch(
-    "http://127.0.0.1:5000/exercise/" + data.exercise_id,
+    "http://localhost:5000/exercise/" + data.exercise_id,
     requestOptions
   );
 
@@ -62,7 +62,7 @@ export async function deleteVideo(data) {
   };
 
   var response = await fetch(
-    "http://127.0.0.1:5000/video/" + data.video_id,
+    "http://localhost:5000/video/" + data.video_id,
     requestOptions
   );
 
@@ -83,7 +83,7 @@ export async function deleteExercise(id) {
   };
 
   var response = await fetch(
-    "http://127.0.0.1:5000/exercise/" + id,
+    "http://localhost:5000/exercise/" + id,
     requestOptions
   );
 
@@ -93,26 +93,25 @@ export async function deleteExercise(id) {
 }
 
 export async function addNewExercise(data) {
-  var myHeaders = new Headers();
-
+  const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
+  const raw = JSON.stringify(data);
 
-  var raw = JSON.stringify(data),
-    newId;
-
-  var requestOptions = {
+  const requestOptions = {
     method: "POST",
     headers: myHeaders,
     body: raw,
     redirect: "follow",
   };
 
-  var response = await fetch("http://127.0.0.1:5000/exercise", requestOptions)
-    .then((response) => response.json())
-    .then((result) => (newId = result.id))
-    .catch((error) => console.log("error", error));
+  const response = await fetch(
+    "http://127.0.0.1:5000/exercise",
+    requestOptions
+  );
 
-  return { newExerciseId: newId };
+  const result = await response.json();
+
+  return { newExerciseId: result.id };
 }
 
 export async function addNewVideo(data) {
@@ -130,7 +129,7 @@ export async function addNewVideo(data) {
     redirect: "follow",
   };
 
-  var response = await fetch("http://127.0.0.1:5000/video", requestOptions)
+  var response = await fetch("http://localhost:5000/video", requestOptions)
     .then((response) => response.json())
     .then((result) => (newId = result.id))
     .catch((error) => console.log("error", error));
@@ -149,7 +148,7 @@ export async function addVideoToExercise(data) {
   };
 
   var response = await fetch(
-    "http://127.0.0.1:5000/exercise/" +
+    "http://localhost:5000/exercise/" +
       data.exercise_id +
       "/video/" +
       data.video_id,

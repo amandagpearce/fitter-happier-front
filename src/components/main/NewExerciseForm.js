@@ -144,23 +144,19 @@ const NewExerciseForm = ({ onNewExerciseCreated }) => {
     let videosArr = buildVideosArray(videos);
 
     try {
-      await addNewExercise(newExercise).then(async (res1) => {
-        for (var x = 0; x < videosArr.length; x++) {
-          console.log("videosArr[x]", x, videosArr[x]);
+      const res1 = await addNewExercise(newExercise);
+      for (let x = 0; x < videosArr.length; x++) {
+        const res2 = await addNewVideo(videosArr[x]);
 
-          await addNewVideo(videosArr[x]).then(async (res2) => {
-            console.log("res2.newVideoId", res2.newVideoId);
-            var data = {
-              exercise_id: res1.newExerciseId,
-              video_id: res2.newVideoId,
-            };
+        const data = {
+          exercise_id: res1.newExerciseId,
+          video_id: res2.newVideoId,
+        };
 
-            await addVideoToExercise(data).then(() => {
-              onNewExerciseCreated();
-            });
-          });
-        }
-      });
+        await addVideoToExercise(data);
+      }
+
+      onNewExerciseCreated();
     } catch (error) {
       console.log("error", error);
     }
