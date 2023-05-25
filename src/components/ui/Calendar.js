@@ -1,7 +1,6 @@
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { useState, useEffect, useCallback } from "react";
-require("node_modules/globalize/lib/cultures/globalize.culture.pt-BR");
 import classes from "./Calendar.module.css";
 
 const localizer = momentLocalizer(moment);
@@ -31,12 +30,6 @@ const ExerciseCalendar = ({ loggedExercises }) => {
     return null;
   }
 
-  const messages = {
-    previous: "Anterior",
-    next: "Próximo",
-    today: "Hoje",
-  };
-
   const calendarStyle = (date) => {
     let currentDate = `${new Date().getDate()} ${
       new Date().getMonth() + 1
@@ -61,10 +54,8 @@ const ExerciseCalendar = ({ loggedExercises }) => {
         style={{ height: 350 }}
         className={classes.calendar}
         localizer={localizer}
-        culture="PT-BR"
         events={loggedExercises}
         views={["month"]}
-        messages={messages}
         dayPropGetter={calendarStyle}
         eventPropGetter={eventStyleGetter}
       />
