@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-
 import Button from "../ui/Button";
 import Video from "../ui/Video";
 import Legend from "../ui/Legend";
 import Modal from "../ui/Modal";
 import Card from "../ui/Card";
-
 import NewExerciseForm from "./NewExerciseForm";
 import NewExerciseVideoForm from "./NewExerciseVideoForm";
-
 import {
   changeExerciseTitle,
   deleteVideo,
@@ -16,17 +13,13 @@ import {
 } from "@component/lib/exercise";
 
 const MyExercises = ({ exercises, onDataChange }) => {
-  let userExercises;
-  let [newExerciseModal, setNewExerciseModal] = useState(false);
-  let [newVideoModal, setNewVideoModal] = useState({
+  const [newExerciseModal, setNewExerciseModal] = useState(false);
+  const [newVideoModal, setNewVideoModal] = useState({
     show: false,
     id: undefined,
   });
-  let [showConfirmModal, setShowConfirmModal] = useState(false);
-  let [editMode1, setEditMode1] = useState(false);
-  let [editMode2, setEditMode2] = useState(false);
-  let [editMode3, setEditMode3] = useState(false);
-  let [exerciseId, setExerciseId] = useState();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [editModes, setEditModes] = useState({});
 
   const onNewVideoHandler = (id) => {
     setNewVideoModal({ show: true, id: id });
@@ -68,19 +61,12 @@ const MyExercises = ({ exercises, onDataChange }) => {
     }
   };
 
-  // Not good should redo
   const onEditHandler = (id) => {
-    if (id === 1) {
-      setEditMode1(true);
-    } else if (id === 2) {
-      setEditMode2(true);
-    } else {
-      setEditMode3(true);
-    }
+    setEditModes((prevEditModes) => ({ ...prevEditModes, [id]: true }));
   };
 
   const onTitleChangeHandler = (id, newTitle) => {
-    var data = {
+    const data = {
       exercise_id: id,
       newTitle: newTitle,
     };
@@ -98,13 +84,7 @@ const MyExercises = ({ exercises, onDataChange }) => {
       console.log("error", error);
     }
 
-    if (id === 1) {
-      setEditMode1(false);
-    } else if (id === 2) {
-      setEditMode2(false);
-    } else {
-      setEditMode3(false);
-    }
+    setEditModes((prevEditModes) => ({ ...prevEditModes, [id]: false }));
   };
 
   const onDeleteVideoHandler = (data, exerciseId) => {
@@ -122,26 +102,17 @@ const MyExercises = ({ exercises, onDataChange }) => {
       console.log("error", error);
     }
 
-    if (exerciseId === 1) {
-      setEditMode1(false);
-    } else if (exerciseId === 2) {
-      setEditMode2(false);
-    } else {
-      setEditMode3(false);
-    }
+    setEditModes((prevEditModes) => ({
+      ...prevEditModes,
+      [exerciseId]: false,
+    }));
   };
+
+  let userExercises = null;
 
   if (exercises) {
     userExercises = exercises.map((exercise) => {
-      var editModeVar;
-      // bad, should research and redo
-      if (exercise.id === 1) {
-        editModeVar = editMode1;
-      } else if (exercise.id === 2) {
-        editModeVar = editMode2;
-      } else {
-        editModeVar = editMode3;
-      }
+      const editModeVar = editModes[exercise.id] || false;
 
       return (
         <div className="exerciseContainer" key={exercise.id}>
